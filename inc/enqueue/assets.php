@@ -97,7 +97,7 @@ function homesea_theme_enqueue_assets(): void {
 		$handle,
 		'homeSeaThemeData',
 		array(
-			'apiUrl'   => esc_url_raw( rest_url( 'theme/v1/site' ) ),
+			'apiUrl'   => homesea_theme_rest_url( 'theme/v1/site' ),
 			'nonce'    => wp_create_nonce( 'wp_rest' ),
 			'homeUrl'  => esc_url_raw( home_url( '/' ) ),
 			'themeUri' => esc_url_raw( HOMESEA_THEME_URI ),

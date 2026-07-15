@@ -224,7 +224,7 @@ function homesea_theme_cf7_contact_config(): array {
 	return array(
 		'enabled'  => true,
 		'form_id'  => $form_id,
-		'rest_url' => rest_url( 'contact-form-7/v1/contact-forms/' . $form_id . '/feedback' ),
+		'rest_url' => homesea_theme_rest_url( 'contact-form-7/v1/contact-forms/' . $form_id . '/feedback' ),
 		'unit_tag' => sprintf( 'wpcf7-f%d-o1', $form_id ),
 		'locale'   => $locale,
 		'version'  => defined( 'WPCF7_VERSION' ) ? (string) WPCF7_VERSION : '',
