@@ -18,6 +18,7 @@ define( 'HOMESEA_THEME_URI', get_template_directory_uri() );
 $homesea_theme_includes = array(
 	'/inc/helpers/vite.php',
 	'/inc/setup/theme-setup.php',
+	'/inc/setup/required-plugins.php',
 	'/inc/enqueue/assets.php',
 	'/inc/cmb2/loader.php',
 	'/inc/helpers/cf7-contact.php',
