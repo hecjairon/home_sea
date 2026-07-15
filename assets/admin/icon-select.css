@@ -1,0 +1,90 @@
+.homesea-icon-select--native {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	margin: 0 !important;
+}
+
+.homesea-icon-select-wrap {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	max-width: 280px;
+	vertical-align: middle;
+}
+
+.homesea-icon-select-btn {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	min-height: 42px;
+	padding: 6px 12px;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+	text-align: left;
+	box-sizing: border-box;
+}
+
+.homesea-icon-select-btn:focus {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+	outline: none;
+}
+
+.homesea-icon-select-label {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.homesea-icon-select-btn img,
+.homesea-icon-select-list img {
+	display: block;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+}
+
+.homesea-icon-select-list {
+	position: absolute;
+	z-index: 100100;
+	top: calc(100% + 4px);
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 4px 0;
+	list-style: none;
+	background: #fff;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	max-height: 260px;
+	overflow: auto;
+	box-sizing: border-box;
+}
+
+.homesea-icon-select-list[hidden] {
+	display: none !important;
+}
+
+.homesea-icon-select-list li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 12px;
+	cursor: pointer;
+}
+
+.homesea-icon-select-list li:hover,
+.homesea-icon-select-list li.is-active {
+	background: #f0f6fc;
+}
+
+.homesea-icon-select-list li.is-active {
+	font-weight: 600;
+}
