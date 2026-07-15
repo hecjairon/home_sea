@@ -1,4 +1,5 @@
 node_modules/
 .DS_Store
 *.log
-.vite/
+# Cache de Vite en la raíz del theme (no el manifest de build)
+/.vite/
