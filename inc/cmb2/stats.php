@@ -147,48 +147,8 @@ function homesea_theme_cmb2_stats(): void {
 	$cmb->add_group_field(
 		$group_id,
 		array(
-			'name'            => __( 'ID', 'homesea_theme' ),
-			'id'              => 'item_id',
-			'type'            => 'text',
-			'sanitization_cb' => 'sanitize_text_field',
-		)
-	);
-
-	$cmb->add_group_field(
-		$group_id,
-		array(
 			'name'            => __( 'Label', 'homesea_theme' ),
 			'id'              => 'label',
-			'type'            => 'text',
-			'sanitization_cb' => 'sanitize_text_field',
-		)
-	);
-
-	$cmb->add_group_field(
-		$group_id,
-		array(
-			'name'            => __( 'Valor', 'homesea_theme' ),
-			'id'              => 'value',
-			'type'            => 'text_small',
-			'sanitization_cb' => 'sanitize_text_field',
-		)
-	);
-
-	$cmb->add_group_field(
-		$group_id,
-		array(
-			'name'            => __( 'Prefijo', 'homesea_theme' ),
-			'id'              => 'prefix',
-			'type'            => 'text',
-			'sanitization_cb' => 'sanitize_text_field',
-		)
-	);
-
-	$cmb->add_group_field(
-		$group_id,
-		array(
-			'name'            => __( 'Sufijo', 'homesea_theme' ),
-			'id'              => 'suffix',
 			'type'            => 'text',
 			'sanitization_cb' => 'sanitize_text_field',
 		)
@@ -205,6 +165,16 @@ function homesea_theme_cmb2_stats(): void {
 			'attributes'      => array(
 				'class' => 'cmb2_select homesea-icon-select',
 			),
+		)
+	);
+
+	$cmb->add_group_field(
+		$group_id,
+		array(
+			'name'            => __( 'Número', 'homesea_theme' ),
+			'id'              => 'value',
+			'type'            => 'text_small',
+			'sanitization_cb' => 'sanitize_text_field',
 		)
 	);
 }

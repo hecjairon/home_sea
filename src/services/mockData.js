@@ -42,10 +42,10 @@ export const mockData = {
   },
   stats: {
     items: [
-      { id: 'properties', label: 'Propiedades exclusivas', value: 850, prefix: '+', icon: 'home' },
-      { id: 'families', label: 'Familias acompañadas', value: 620, prefix: '+', icon: 'users' },
-      { id: 'years', label: 'Años de experiencia', value: 18, icon: 'clock' },
-      { id: 'satisfaction', label: 'Clientes satisfechos', value: 97, suffix: '%', icon: 'star' },
+      { id: 'properties', label: 'Propiedades exclusivas', value: '+850', icon: 'home' },
+      { id: 'families', label: 'Familias acompañadas', value: '+620', icon: 'users' },
+      { id: 'years', label: 'Años de experiencia', value: '18', icon: 'clock' },
+      { id: 'satisfaction', label: 'Clientes satisfechos', value: '97%', icon: 'star' },
     ],
   },
   properties: {

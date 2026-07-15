@@ -225,17 +225,31 @@ function homesea_theme_rest_hero( array $defaults ): array {
 }
 
 /**
+ * Normalize Stats icon to a known key.
+ */
+function homesea_theme_rest_stats_icon( mixed $icon ): string {
+	if ( function_exists( 'homesea_theme_sanitize_stats_icon' ) ) {
+		return homesea_theme_sanitize_stats_icon( $icon );
+	}
+
+	$key     = sanitize_text_field( (string) $icon );
+	$allowed = array( 'home', 'users', 'clock', 'star' );
+
+	return in_array( $key, $allowed, true ) ? $key : 'home';
+}
+
+/**
  * Build stats slice.
  *
  * @param array<string, mixed> $defaults Defaults.
  * @return array<string, mixed>
  */
 function homesea_theme_rest_stats( array $defaults ): array {
-	$raw = homesea_theme_get_option( 'stats', 'items', array() );
+	$raw   = homesea_theme_get_option( 'stats', 'items', array() );
 	$items = array();
 
 	if ( is_array( $raw ) ) {
-		foreach ( $raw as $item ) {
+		foreach ( $raw as $index => $item ) {
 			if ( ! is_array( $item ) ) {
 				continue;
 			}
@@ -245,24 +259,20 @@ function homesea_theme_rest_stats( array $defaults ): array {
 				continue;
 			}
 
-			$row = array(
-				'id'    => sanitize_text_field( (string) ( $item['item_id'] ?? $item['id'] ?? '' ) ),
+			$icon  = homesea_theme_rest_stats_icon( $item['icon'] ?? 'home' );
+			$id    = sanitize_title( $label );
+			$value = sanitize_text_field( (string) ( $item['value'] ?? '' ) );
+
+			if ( '' === $id ) {
+				$id = 'stat-' . ( (int) $index + 1 );
+			}
+
+			$items[] = array(
+				'id'    => $id,
 				'label' => $label,
-				'value' => (int) ( $item['value'] ?? 0 ),
-				'icon'  => sanitize_text_field( (string) ( $item['icon'] ?? '' ) ),
+				'value' => $value,
+				'icon'  => $icon,
 			);
-
-			$prefix = sanitize_text_field( (string) ( $item['prefix'] ?? '' ) );
-			$suffix = sanitize_text_field( (string) ( $item['suffix'] ?? '' ) );
-
-			if ( '' !== $prefix ) {
-				$row['prefix'] = $prefix;
-			}
-			if ( '' !== $suffix ) {
-				$row['suffix'] = $suffix;
-			}
-
-			$items[] = $row;
 		}
 	}
 

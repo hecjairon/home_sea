@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const ICONS = {
   home: (
@@ -16,31 +15,6 @@ const ICONS = {
   ),
 };
 
-function AnimatedCounter({ value, prefix = '', suffix = '' }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  const motionValue = useMotionValue(0);
-  const spring = useSpring(motionValue, { duration: 1.8, bounce: 0 });
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    if (inView) motionValue.set(value);
-  }, [inView, motionValue, value]);
-
-  useEffect(() => {
-    const unsub = spring.on('change', (v) => setDisplay(Math.round(v)));
-    return unsub;
-  }, [spring]);
-
-  return (
-    <p ref={ref} className="text-3xl lg:text-4xl font-bold text-navy mb-1 tabular-nums">
-      {prefix}
-      {display}
-      {suffix}
-    </p>
-  );
-}
-
 function StatIcon({ icon }) {
   return (
     <svg className="w-7 h-7 text-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,7 +24,7 @@ function StatIcon({ icon }) {
 }
 
 /**
- * @param {{ items: Array<{id: string, label: string, value: number, prefix?: string, suffix?: string, icon: string}> }} props
+ * @param {{ items: Array<{id: string, label: string, value: string, icon: string}> }} props
  */
 export default function Stats({ items }) {
   return (
@@ -73,7 +47,9 @@ export default function Stats({ items }) {
               <div className="w-14 h-14 mx-auto mb-4 rounded-3xl bg-terracotta/10 flex items-center justify-center" aria-hidden="true">
                 <StatIcon icon={item.icon} />
               </div>
-              <AnimatedCounter value={item.value} prefix={item.prefix} suffix={item.suffix} />
+              <p className="text-3xl lg:text-4xl font-bold text-navy mb-1 tabular-nums">
+                {item.value}
+              </p>
               <p className="text-sm text-gray-500">{item.label}</p>
             </motion.article>
           ))}
