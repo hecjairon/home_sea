@@ -1,0 +1,17 @@
+/*
+Theme Name: HomeSea Theme
+Theme URI: https://example.com/homesea_theme
+Author: Hybrid Theme Starter
+Author URI: https://example.com
+Description: Starter theme WordPress híbrido HomeSea (React + Vite + CMB2). WordPress administra contenido y routing; React renderiza la UI.
+Version: 1.0.0
+Requires at least: 6.8
+Tested up to: 6.8
+Requires PHP: 8.3
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: homesea_theme
+Tags: custom-theme, hybrid, react
+*/
+
+/* Theme styles are compiled via Vite into dist/. */
