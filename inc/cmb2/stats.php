@@ -17,26 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array<string, array{label: string, url: string}>
  */
 function homesea_theme_stats_icons(): array {
-	$base = trailingslashit( HOMESEA_THEME_URI ) . 'assets/icons/';
-
-	return array(
-		'home'  => array(
-			'label' => __( 'Casa', 'homesea_theme' ),
-			'url'   => $base . 'home.svg',
-		),
-		'users' => array(
-			'label' => __( 'Usuarios', 'homesea_theme' ),
-			'url'   => $base . 'users.svg',
-		),
-		'clock' => array(
-			'label' => __( 'Reloj', 'homesea_theme' ),
-			'url'   => $base . 'clock.svg',
-		),
-		'star'  => array(
-			'label' => __( 'Estrella', 'homesea_theme' ),
-			'url'   => $base . 'star.svg',
-		),
-	);
+	return homesea_theme_icons_map( array( 'home', 'users', 'clock', 'star' ) );
 }
 
 /**
@@ -45,13 +26,7 @@ function homesea_theme_stats_icons(): array {
  * @return array<string, string>
  */
 function homesea_theme_stats_icon_options(): array {
-	$options = array();
-
-	foreach ( homesea_theme_stats_icons() as $key => $icon ) {
-		$options[ $key ] = $icon['label'];
-	}
-
-	return $options;
+	return homesea_theme_icon_select_options_from( homesea_theme_stats_icons() );
 }
 
 /**
@@ -60,9 +35,7 @@ function homesea_theme_stats_icon_options(): array {
  * @param mixed $value Raw value.
  */
 function homesea_theme_sanitize_stats_icon( mixed $value ): string {
-	$key = sanitize_text_field( (string) $value );
-
-	return array_key_exists( $key, homesea_theme_stats_icons() ) ? $key : 'home';
+	return homesea_theme_sanitize_icon_key( $value, homesea_theme_stats_icons(), 'home' );
 }
 
 /**
@@ -71,45 +44,10 @@ function homesea_theme_sanitize_stats_icon( mixed $value ): string {
  * @param string $hook Current admin page hook.
  */
 function homesea_theme_stats_admin_assets( string $hook ): void {
-	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-	if ( 'homesea_theme_stats_settings' !== $page ) {
-		return;
-	}
-
-	$css = HOMESEA_THEME_DIR . '/assets/admin/icon-select.css';
-	$js  = HOMESEA_THEME_DIR . '/assets/admin/icon-select.js';
-
-	wp_enqueue_style(
-		'homesea-icon-select',
-		HOMESEA_THEME_URI . '/assets/admin/icon-select.css',
-		array(),
-		(string) filemtime( $css )
-	);
-
-	wp_enqueue_script(
-		'homesea-icon-select',
-		HOMESEA_THEME_URI . '/assets/admin/icon-select.js',
-		array( 'jquery' ),
-		(string) filemtime( $js ),
-		true
-	);
-
-	$icons = array();
-
-	foreach ( homesea_theme_stats_icons() as $key => $icon ) {
-		$icons[ $key ] = array(
-			'label' => $icon['label'],
-			'url'   => esc_url_raw( $icon['url'] ),
-		);
-	}
-
-	wp_localize_script(
-		'homesea-icon-select',
-		'homeseaIconSelect',
-		array(
-			'icons' => $icons,
-		)
+	unset( $hook );
+	homesea_theme_enqueue_icon_select_for_page(
+		'homesea_theme_stats_settings',
+		homesea_theme_stats_icons()
 	);
 }
 add_action( 'admin_enqueue_scripts', 'homesea_theme_stats_admin_assets' );

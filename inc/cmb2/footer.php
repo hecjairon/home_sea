@@ -12,6 +12,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Icons available for Footer social networks.
+ *
+ * @return array<string, array{label: string, url: string}>
+ */
+function homesea_theme_footer_social_icons(): array {
+	return homesea_theme_icons_map(
+		array(
+			'instagram',
+			'linkedin',
+			'facebook',
+			'twitter',
+			'youtube',
+			'whatsapp',
+		)
+	);
+}
+
+/**
+ * CMB2 select options for Footer social icons.
+ *
+ * @return array<string, string>
+ */
+function homesea_theme_footer_social_icon_options(): array {
+	return homesea_theme_icon_select_options_from( homesea_theme_footer_social_icons() );
+}
+
+/**
+ * Sanitize Footer social icon key.
+ *
+ * @param mixed $value Raw value.
+ */
+function homesea_theme_sanitize_footer_social_icon( mixed $value ): string {
+	return homesea_theme_sanitize_icon_key( $value, homesea_theme_footer_social_icons(), 'instagram' );
+}
+
+/**
+ * Enqueue icon select assets on the Footer settings page.
+ *
+ * @param string $hook Current admin page hook.
+ */
+function homesea_theme_footer_admin_assets( string $hook ): void {
+	unset( $hook );
+	homesea_theme_enqueue_icon_select_for_page(
+		'homesea_theme_footer_settings',
+		homesea_theme_footer_social_icons()
+	);
+}
+add_action( 'admin_enqueue_scripts', 'homesea_theme_footer_admin_assets' );
+
+/**
  * Register Footer settings tab.
  */
 function homesea_theme_cmb2_footer(): void {
@@ -96,8 +146,12 @@ function homesea_theme_cmb2_footer(): void {
 		array(
 			'name'            => __( 'Icono', 'homesea_theme' ),
 			'id'              => 'icon',
-			'type'            => 'text',
-			'sanitization_cb' => 'sanitize_text_field',
+			'type'            => 'select',
+			'options_cb'      => 'homesea_theme_footer_social_icon_options',
+			'sanitization_cb' => 'homesea_theme_sanitize_footer_social_icon',
+			'attributes'      => array(
+				'class' => 'cmb2_select homesea-icon-select',
+			),
 		)
 	);
 

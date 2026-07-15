@@ -53,6 +53,7 @@ function homesea_theme_cmb2_location(): void {
 			'id'           => 'maps_url',
 			'type'         => 'text_url',
 			'default'      => 'https://maps.google.com/?q=Paseo+Maritimo+42+Marbella',
+			'desc'         => __( 'Enlace de Google Maps (compartir o búsqueda). Se usa como fondo del mapa y en el botón “Cómo llegar”.', 'homesea_theme' ),
 			'show_in_rest' => WP_REST_Server::READABLE,
 		)
 	);

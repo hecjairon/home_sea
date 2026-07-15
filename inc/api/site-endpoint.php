@@ -124,7 +124,10 @@ function homesea_theme_normalize_links( mixed $items, bool $with_icon = false ):
 		);
 
 		if ( $with_icon ) {
-			$row['icon'] = sanitize_text_field( (string) ( $item['icon'] ?? '' ) );
+			$icon = (string) ( $item['icon'] ?? '' );
+			$row['icon'] = function_exists( 'homesea_theme_sanitize_footer_social_icon' )
+				? homesea_theme_sanitize_footer_social_icon( $icon )
+				: sanitize_text_field( $icon );
 		}
 
 		$out[] = $row;
@@ -282,48 +285,34 @@ function homesea_theme_rest_stats( array $defaults ): array {
 }
 
 /**
- * Build properties slice.
+ * Build properties slice (items from selected CPT propiedad posts).
  *
  * @param array<string, mixed> $defaults Defaults.
  * @return array<string, mixed>
  */
 function homesea_theme_rest_properties( array $defaults ): array {
-	$raw   = homesea_theme_get_option( 'properties', 'items', array() );
+	$raw = homesea_theme_get_option( 'properties', 'home_properties', array() );
+	$ids = function_exists( 'homesea_theme_normalize_home_property_ids' )
+		? homesea_theme_normalize_home_property_ids( $raw )
+		: array();
+
 	$items = array();
 
-	if ( is_array( $raw ) ) {
-		foreach ( $raw as $item ) {
-			if ( ! is_array( $item ) ) {
-				continue;
-			}
+	if ( function_exists( 'homesea_theme_query_propiedad_items' ) ) {
+		$items = homesea_theme_query_propiedad_items( $ids, 6 );
+	}
 
-			$image = homesea_theme_file_url( $item['image_url'] ?? '' );
-			$price = sanitize_text_field( (string) ( $item['price'] ?? '' ) );
-
-			if ( '' === $image && '' === $price ) {
-				continue;
-			}
-
-			$items[] = array(
-				'image_url'     => $image,
-				'image_alt'     => sanitize_text_field( (string) ( $item['image_alt'] ?? '' ) ),
-				'badge'         => sanitize_text_field( (string) ( $item['badge'] ?? '' ) ),
-				'badge_variant' => sanitize_text_field( (string) ( $item['badge_variant'] ?? 'terracotta' ) ),
-				'price'         => $price,
-				'location'      => sanitize_text_field( (string) ( $item['location'] ?? '' ) ),
-				'beds'          => (int) ( $item['beds'] ?? 0 ),
-				'baths'         => (int) ( $item['baths'] ?? 0 ),
-				'area'          => sanitize_text_field( (string) ( $item['area'] ?? '' ) ),
-				'details_url'   => homesea_theme_safe_url( $item['details_url'] ?? '#' ),
-			);
-		}
+	$catalog_url = homesea_theme_opt( 'properties', 'catalog_url', $defaults['catalog_url'] );
+	$catalog_url = homesea_theme_safe_url( $catalog_url );
+	if ( ( '' === $catalog_url || '#' === $catalog_url ) && function_exists( 'homesea_theme_propiedad_archive_url' ) ) {
+		$catalog_url = homesea_theme_propiedad_archive_url();
 	}
 
 	return array(
 		'eyebrow'       => sanitize_text_field( (string) homesea_theme_opt( 'properties', 'eyebrow', $defaults['eyebrow'] ) ),
 		'title'         => sanitize_text_field( (string) homesea_theme_opt( 'properties', 'title', $defaults['title'] ) ),
 		'catalog_label' => sanitize_text_field( (string) homesea_theme_opt( 'properties', 'catalog_label', $defaults['catalog_label'] ) ),
-		'catalog_url'   => homesea_theme_safe_url( homesea_theme_opt( 'properties', 'catalog_url', $defaults['catalog_url'] ) ),
+		'catalog_url'   => $catalog_url,
 		'items'         => empty( $items ) ? $defaults['items'] : $items,
 	);
 }
@@ -349,10 +338,14 @@ function homesea_theme_rest_about( array $defaults ): array {
 				continue;
 			}
 
+			$icon = function_exists( 'homesea_theme_sanitize_about_icon' )
+				? homesea_theme_sanitize_about_icon( $item['icon'] ?? 'heart' )
+				: sanitize_text_field( (string) ( $item['icon'] ?? 'heart' ) );
+
 			$items[] = array(
 				'title'       => $title,
 				'description' => sanitize_textarea_field( (string) ( $item['description'] ?? '' ) ),
-				'icon'        => sanitize_text_field( (string) ( $item['icon'] ?? '' ) ),
+				'icon'        => $icon,
 			);
 		}
 	}
@@ -366,44 +359,35 @@ function homesea_theme_rest_about( array $defaults ): array {
 }
 
 /**
- * Build projects slice.
+ * Build projects slice (items from selected CPT proyecto posts).
  *
  * @param array<string, mixed> $defaults Defaults.
  * @return array<string, mixed>
  */
 function homesea_theme_rest_projects( array $defaults ): array {
-	$raw   = homesea_theme_get_option( 'projects', 'items', array() );
+	$raw = homesea_theme_get_option( 'projects', 'home_projects', array() );
+	$ids = function_exists( 'homesea_theme_normalize_home_project_ids' )
+		? homesea_theme_normalize_home_project_ids( $raw )
+		: array();
+
 	$items = array();
 
-	if ( is_array( $raw ) ) {
-		foreach ( $raw as $item ) {
-			if ( ! is_array( $item ) ) {
-				continue;
-			}
+	if ( function_exists( 'homesea_theme_query_proyecto_items' ) ) {
+		$items = homesea_theme_query_proyecto_items( $ids, 6 );
+	}
 
-			$title = sanitize_text_field( (string) ( $item['title'] ?? '' ) );
-			$image = homesea_theme_file_url( $item['image_url'] ?? '' );
-
-			if ( '' === $title && '' === $image ) {
-				continue;
-			}
-
-			$items[] = array(
-				'image_url'     => $image,
-				'image_alt'     => sanitize_text_field( (string) ( $item['image_alt'] ?? '' ) ),
-				'badge'         => sanitize_text_field( (string) ( $item['badge'] ?? '' ) ),
-				'badge_variant' => sanitize_text_field( (string) ( $item['badge_variant'] ?? 'terracotta' ) ),
-				'title'         => $title,
-				'location'      => sanitize_text_field( (string) ( $item['location'] ?? '' ) ),
-				'url'           => homesea_theme_safe_url( $item['url'] ?? '#' ),
-			);
-		}
+	$catalog_url = homesea_theme_opt( 'projects', 'catalog_url', $defaults['catalog_url'] ?? '' );
+	$catalog_url = homesea_theme_safe_url( $catalog_url );
+	if ( ( '' === $catalog_url || '#' === $catalog_url ) && function_exists( 'homesea_theme_proyecto_archive_url' ) ) {
+		$catalog_url = homesea_theme_proyecto_archive_url();
 	}
 
 	return array(
-		'eyebrow' => sanitize_text_field( (string) homesea_theme_opt( 'projects', 'eyebrow', $defaults['eyebrow'] ) ),
-		'title'   => sanitize_text_field( (string) homesea_theme_opt( 'projects', 'title', $defaults['title'] ) ),
-		'items'   => empty( $items ) ? $defaults['items'] : $items,
+		'eyebrow'       => sanitize_text_field( (string) homesea_theme_opt( 'projects', 'eyebrow', $defaults['eyebrow'] ) ),
+		'title'         => sanitize_text_field( (string) homesea_theme_opt( 'projects', 'title', $defaults['title'] ) ),
+		'catalog_label' => sanitize_text_field( (string) homesea_theme_opt( 'projects', 'catalog_label', $defaults['catalog_label'] ?? 'Ver todos los proyectos' ) ),
+		'catalog_url'   => $catalog_url,
+		'items'         => empty( $items ) ? $defaults['items'] : $items,
 	);
 }
 
@@ -468,11 +452,15 @@ function homesea_theme_rest_process( array $defaults ): array {
 				continue;
 			}
 
+			$icon = function_exists( 'homesea_theme_sanitize_process_icon' )
+				? homesea_theme_sanitize_process_icon( $item['icon'] ?? 'search' )
+				: sanitize_text_field( (string) ( $item['icon'] ?? 'search' ) );
+
 			$steps[] = array(
 				'number'      => sanitize_text_field( (string) ( $item['number'] ?? '' ) ),
 				'title'       => $title,
 				'description' => sanitize_text_field( (string) ( $item['description'] ?? '' ) ),
-				'icon'        => sanitize_text_field( (string) ( $item['icon'] ?? '' ) ),
+				'icon'        => $icon,
 			);
 		}
 	}

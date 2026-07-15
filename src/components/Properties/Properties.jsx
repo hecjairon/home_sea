@@ -1,11 +1,5 @@
 import { motion } from 'framer-motion';
 
-const BADGE_STYLES = {
-  terracotta: 'bg-terracotta text-white',
-  gold: 'bg-gold text-navy-dark',
-  navy: 'bg-navy text-white',
-};
-
 /**
  * @param {{ data: object }} props
  */
@@ -39,9 +33,9 @@ export default function Properties({ data }) {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.items.map((item, index) => (
+          {(data.items || []).map((item, index) => (
             <motion.article
-              key={item.details_url + item.location}
+              key={item.list_key ?? `${item.id}-${index}`}
               className="property-card rounded-3xl overflow-hidden"
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -57,11 +51,14 @@ export default function Properties({ data }) {
                   width="800"
                   height="600"
                 />
-                <span
-                  className={`absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full ${BADGE_STYLES[item.badge_variant] || BADGE_STYLES.terracotta}`}
-                >
-                  {item.badge}
-                </span>
+                {item.badge ? (
+                  <span
+                    className="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full text-white"
+                    style={{ backgroundColor: item.badge_color || '#C45C26' }}
+                  >
+                    {item.badge}
+                  </span>
+                ) : null}
               </div>
               <div className="p-6">
                 <p className="text-2xl font-bold text-navy mb-1">{item.price}</p>

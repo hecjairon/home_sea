@@ -1,19 +1,85 @@
 import { motion } from 'framer-motion';
 
 /**
+ * Convert a Google Maps share/search URL into an embeddable iframe src.
+ * Supports `?q=`, `/maps/place/…`, and existing `/maps/embed` or `output=embed` URLs.
+ *
+ * @param {string} mapsUrl
+ * @param {string} [fallbackQuery]
+ */
+function toMapsEmbedUrl(mapsUrl, fallbackQuery = '') {
+  const fallback = fallbackQuery
+    ? `https://www.google.com/maps?q=${encodeURIComponent(fallbackQuery)}&z=15&output=embed`
+    : '';
+
+  if (!mapsUrl || typeof mapsUrl !== 'string') {
+    return fallback;
+  }
+
+  const trimmed = mapsUrl.trim();
+  if (!trimmed || trimmed === '#') {
+    return fallback;
+  }
+
+  try {
+    const url = new URL(trimmed);
+
+    if (url.pathname.includes('/maps/embed') || url.searchParams.get('output') === 'embed') {
+      if (!url.searchParams.has('output') && !url.pathname.includes('/maps/embed')) {
+        url.searchParams.set('output', 'embed');
+      }
+      return url.toString();
+    }
+
+    const q = url.searchParams.get('q');
+    if (q) {
+      return `https://www.google.com/maps?q=${encodeURIComponent(q)}&z=15&output=embed`;
+    }
+
+    const placeMatch = url.pathname.match(/\/maps\/place\/([^/]+)/);
+    if (placeMatch?.[1]) {
+      const place = decodeURIComponent(placeMatch[1].replace(/\+/g, ' '));
+      return `https://www.google.com/maps?q=${encodeURIComponent(place)}&z=15&output=embed`;
+    }
+
+    const atMatch = trimmed.match(/@(-?\d+\.?\d*),(-?\d+\.?\d*)/);
+    if (atMatch) {
+      const lat = atMatch[1];
+      const lng = atMatch[2];
+      return `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lng}`)}&z=15&output=embed`;
+    }
+
+    return `https://www.google.com/maps?q=${encodeURIComponent(trimmed)}&z=15&output=embed`;
+  } catch {
+    return fallback || `https://www.google.com/maps?q=${encodeURIComponent(trimmed)}&z=15&output=embed`;
+  }
+}
+
+/**
  * @param {{ data: { title: string, address: string, maps_url: string, cta_label: string } }} props
  */
 export default function Location({ data }) {
-  const patternBg =
-    "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B8734A' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
+  const embedSrc = toMapsEmbedUrl(data.maps_url, data.address || data.title);
 
   return (
     <section className="relative" aria-labelledby="map-heading">
       <div className="map-container h-[400px] lg:h-[500px] w-full">
-        <div className="absolute inset-0 opacity-40" style={{ backgroundImage: patternBg }} aria-hidden="true" />
-        <div className="absolute inset-0 flex items-center justify-center">
+        {embedSrc ? (
+          <iframe
+            title="Mapa de ubicación"
+            src={embedSrc}
+            className="absolute inset-0 w-full h-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        ) : null}
+
+        <div className="absolute inset-0 bg-cream/55 pointer-events-none" aria-hidden="true" />
+
+        <div className="absolute inset-0 flex items-center justify-center px-6">
           <motion.div
-            className="text-center px-6"
+            className="text-center warm-surface rounded-3xl px-8 py-8 shadow-lg max-w-md"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -30,7 +96,7 @@ export default function Location({ data }) {
             <p className="font-display text-2xl font-bold text-navy mb-2">{data.title}</p>
             <p className="text-gray-600 text-sm mb-6 whitespace-pre-line">{data.address}</p>
             <a
-              href={data.maps_url}
+              href={data.maps_url || embedSrc}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-terracotta-glow inline-flex items-center gap-2 px-8 py-3 bg-terracotta text-white text-sm font-semibold rounded-full hover:bg-terracotta-dark transition-all duration-300"

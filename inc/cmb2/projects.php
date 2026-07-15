@@ -1,6 +1,6 @@
 <?php
 /**
- * CMB2 tab — Projects.
+ * CMB2 tab — Projects (section settings; items from selected CPT proyecto).
  *
  * @package HomeSeaTheme
  */
@@ -26,8 +26,9 @@ function homesea_theme_cmb2_projects(): void {
 	}
 
 	$text_fields = array(
-		'eyebrow' => array( 'name' => __( 'Eyebrow', 'homesea_theme' ), 'default' => 'Desarrollos selectos' ),
-		'title'   => array( 'name' => __( 'Título', 'homesea_theme' ), 'default' => 'Proyectos recientes' ),
+		'eyebrow'       => array( 'name' => __( 'Eyebrow', 'homesea_theme' ), 'default' => 'Desarrollos selectos' ),
+		'title'         => array( 'name' => __( 'Título', 'homesea_theme' ), 'default' => 'Proyectos recientes' ),
+		'catalog_label' => array( 'name' => __( 'Catálogo — label', 'homesea_theme' ), 'default' => 'Ver todos los proyectos' ),
 	);
 
 	foreach ( $text_fields as $id => $cfg ) {
@@ -43,15 +44,29 @@ function homesea_theme_cmb2_projects(): void {
 		);
 	}
 
+	$cmb->add_field(
+		array(
+			'name'         => __( 'Catálogo — URL', 'homesea_theme' ),
+			'id'           => 'catalog_url',
+			'type'         => 'text_url',
+			'default'      => function_exists( 'homesea_theme_proyecto_archive_url' )
+				? homesea_theme_proyecto_archive_url()
+				: home_url( '/proyectos/' ),
+			'desc'         => __( 'Por defecto apunta al archivo /proyectos/.', 'homesea_theme' ),
+			'show_in_rest' => WP_REST_Server::READABLE,
+		)
+	);
+
 	$group_id = $cmb->add_field(
 		array(
-			'name'         => __( 'Proyectos', 'homesea_theme' ),
-			'id'           => 'items',
+			'name'         => __( 'Proyectos en home', 'homesea_theme' ),
+			'desc'         => __( 'Elige los proyectos del CPT para el carrusel del home. Puedes repetir el mismo proyecto. El orden de las filas define el orden del listado.', 'homesea_theme' ),
+			'id'           => 'home_projects',
 			'type'         => 'group',
 			'repeatable'   => true,
 			'options'      => array(
 				'group_title'   => __( 'Proyecto {#}', 'homesea_theme' ),
-				'add_button'    => __( 'Agregar proyecto', 'homesea_theme' ),
+				'add_button'    => __( 'Añadir proyecto al listado', 'homesea_theme' ),
 				'remove_button' => __( 'Eliminar', 'homesea_theme' ),
 				'sortable'      => true,
 			),
@@ -62,42 +77,11 @@ function homesea_theme_cmb2_projects(): void {
 	$cmb->add_group_field(
 		$group_id,
 		array(
-			'name'         => __( 'Imagen', 'homesea_theme' ),
-			'id'           => 'image_url',
-			'type'         => 'file',
-			'options'      => array( 'url' => true ),
-			'text'         => array( 'add_upload_file_text' => __( 'Adicionar imagen', 'homesea_theme' ) ),
-			'query_args'   => array( 'type' => array( 'image/jpeg', 'image/png', 'image/webp' ) ),
-			'preview_size' => array( 300, 300 ),
-		)
-	);
-
-	$group_text_fields = array(
-		'image_alt'     => __( 'Alt de imagen', 'homesea_theme' ),
-		'badge'         => __( 'Badge', 'homesea_theme' ),
-		'badge_variant' => __( 'Variante del badge', 'homesea_theme' ),
-		'title'         => __( 'Título', 'homesea_theme' ),
-		'location'      => __( 'Ubicación', 'homesea_theme' ),
-	);
-
-	foreach ( $group_text_fields as $id => $name ) {
-		$cmb->add_group_field(
-			$group_id,
-			array(
-				'name'            => $name,
-				'id'              => $id,
-				'type'            => 'text',
-				'sanitization_cb' => 'sanitize_text_field',
-			)
-		);
-	}
-
-	$cmb->add_group_field(
-		$group_id,
-		array(
-			'name' => __( 'URL', 'homesea_theme' ),
-			'id'   => 'url',
-			'type' => 'text_url',
+			'name'            => __( 'Proyecto', 'homesea_theme' ),
+			'id'              => 'proyecto_id',
+			'type'            => 'select',
+			'options_cb'      => 'homesea_theme_proyecto_select_options',
+			'sanitization_cb' => 'homesea_theme_sanitize_proyecto_id',
 		)
 	);
 }

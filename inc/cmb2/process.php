@@ -12,6 +12,71 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Icons available in the Process module.
+ *
+ * @return array<string, array{label: string, url: string}>
+ */
+function homesea_theme_process_icons(): array {
+	return homesea_theme_icons_map(
+		array(
+			'search',
+			'eye',
+			'card',
+			'document',
+			'smile',
+			'home',
+			'users',
+			'star',
+			'clock',
+			'key',
+			'map-pin',
+			'check',
+			'award',
+			'sparkles',
+			'phone',
+			'handshake',
+			'leaf',
+			'heart',
+			'globe',
+			'shield',
+			'building',
+		)
+	);
+}
+
+/**
+ * CMB2 select options for Process icons.
+ *
+ * @return array<string, string>
+ */
+function homesea_theme_process_icon_options(): array {
+	return homesea_theme_icon_select_options_from( homesea_theme_process_icons() );
+}
+
+/**
+ * Sanitize Process icon key.
+ *
+ * @param mixed $value Raw value.
+ */
+function homesea_theme_sanitize_process_icon( mixed $value ): string {
+	return homesea_theme_sanitize_icon_key( $value, homesea_theme_process_icons(), 'search' );
+}
+
+/**
+ * Enqueue icon select assets on the Process settings page.
+ *
+ * @param string $hook Current admin page hook.
+ */
+function homesea_theme_process_admin_assets( string $hook ): void {
+	unset( $hook );
+	homesea_theme_enqueue_icon_select_for_page(
+		'homesea_theme_process_settings',
+		homesea_theme_process_icons()
+	);
+}
+add_action( 'admin_enqueue_scripts', 'homesea_theme_process_admin_assets' );
+
+/**
  * Register Process settings tab.
  */
 function homesea_theme_cmb2_process(): void {
@@ -59,22 +124,47 @@ function homesea_theme_cmb2_process(): void {
 		)
 	);
 
-	$group_text_fields = array(
-		'number'      => __( 'Número', 'homesea_theme' ),
-		'title'       => __( 'Título', 'homesea_theme' ),
-		'description' => __( 'Descripción', 'homesea_theme' ),
-		'icon'        => __( 'Icono', 'homesea_theme' ),
+	$cmb->add_group_field(
+		$group_id,
+		array(
+			'name'            => __( 'Número', 'homesea_theme' ),
+			'id'              => 'number',
+			'type'            => 'text',
+			'sanitization_cb' => 'sanitize_text_field',
+		)
 	);
 
-	foreach ( $group_text_fields as $id => $name ) {
-		$cmb->add_group_field(
-			$group_id,
-			array(
-				'name'            => $name,
-				'id'              => $id,
-				'type'            => 'text',
-				'sanitization_cb' => 'sanitize_text_field',
-			)
-		);
-	}
+	$cmb->add_group_field(
+		$group_id,
+		array(
+			'name'            => __( 'Título', 'homesea_theme' ),
+			'id'              => 'title',
+			'type'            => 'text',
+			'sanitization_cb' => 'sanitize_text_field',
+		)
+	);
+
+	$cmb->add_group_field(
+		$group_id,
+		array(
+			'name'            => __( 'Descripción', 'homesea_theme' ),
+			'id'              => 'description',
+			'type'            => 'text',
+			'sanitization_cb' => 'sanitize_text_field',
+		)
+	);
+
+	$cmb->add_group_field(
+		$group_id,
+		array(
+			'name'            => __( 'Icono', 'homesea_theme' ),
+			'id'              => 'icon',
+			'type'            => 'select',
+			'options_cb'      => 'homesea_theme_process_icon_options',
+			'sanitization_cb' => 'homesea_theme_sanitize_process_icon',
+			'attributes'      => array(
+				'class' => 'cmb2_select homesea-icon-select',
+			),
+		)
+	);
 }

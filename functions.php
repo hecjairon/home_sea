@@ -18,7 +18,10 @@ define( 'HOMESEA_THEME_URI', get_template_directory_uri() );
 $homesea_theme_includes = array(
 	'/inc/helpers/vite.php',
 	'/inc/helpers/rest-url.php',
+	'/inc/helpers/theme-icons.php',
 	'/inc/setup/theme-setup.php',
+	'/inc/setup/cpt-propiedad.php',
+	'/inc/setup/cpt-proyecto.php',
 	'/inc/setup/required-plugins.php',
 	'/inc/enqueue/assets.php',
 	'/inc/cmb2/loader.php',

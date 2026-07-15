@@ -46,8 +46,11 @@ function ChevronRight() {
 export default function Projects({ data }) {
   const [index, setIndex] = useState(0);
   const slidesPerView = useSlidesPerView();
-  const total = data.items.length;
+  const items = Array.isArray(data.items) ? data.items : [];
+  const total = items.length;
   const maxIndex = Math.max(0, total - slidesPerView);
+  const catalogUrl = data.catalog_url || (typeof window !== 'undefined' ? window.homeSeaThemeData?.projectsCollectionUrl : '') || '/proyectos/';
+  const catalogLabel = data.catalog_label || 'Ver todos los proyectos';
 
   useEffect(() => {
     setIndex((i) => Math.min(i, maxIndex));
@@ -102,38 +105,43 @@ export default function Projects({ data }) {
             animate={{ x: `-${index * slideWidth}%` }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            {data.items.map((item) => (
-              <article key={item.title} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
-                <div className="warm-surface rounded-3xl overflow-hidden group">
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={item.image_url}
-                      alt={item.image_alt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      loading="lazy"
-                      width="800"
-                      height="500"
-                    />
+            {items.map((item, itemIndex) => {
+              const link = item.url || item.details_url || '#';
+              return (
+                <article key={item.list_key || item.id || `${item.title}-${itemIndex}`} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
+                  <div className="warm-surface rounded-3xl overflow-hidden group">
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={item.image_url}
+                        alt={item.image_alt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
+                        width="800"
+                        height="500"
+                      />
+                    </div>
+                    <div className="p-6">
+                      {item.badge ? (
+                        <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${BADGE_STYLES[item.badge_variant] || BADGE_STYLES.terracotta}`}>
+                          {item.badge}
+                        </span>
+                      ) : null}
+                      <h3 className="font-display font-bold text-xl text-navy mt-3 mb-1">{item.title}</h3>
+                      <p className="text-gray-500 text-sm mb-4">{item.location}</p>
+                      <a
+                        href={link}
+                        className="inline-flex items-center gap-2 text-terracotta font-medium text-sm hover:text-terracotta-dark transition-colors"
+                      >
+                        Ver proyecto
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                  <div className="p-6">
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${BADGE_STYLES[item.badge_variant] || BADGE_STYLES.terracotta}`}>
-                      {item.badge}
-                    </span>
-                    <h3 className="font-display font-bold text-xl text-navy mt-3 mb-1">{item.title}</h3>
-                    <p className="text-gray-500 text-sm mb-4">{item.location}</p>
-                    <a
-                      href={item.url}
-                      className="inline-flex items-center gap-2 text-terracotta font-medium text-sm hover:text-terracotta-dark transition-colors"
-                    >
-                      Ver proyecto
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </motion.div>
 
           <div className="flex justify-center gap-2 mt-8" role="tablist" aria-label="Indicadores de proyectos">
@@ -150,6 +158,20 @@ export default function Projects({ data }) {
             ))}
           </div>
         </div>
+
+        {catalogUrl ? (
+          <div className="mt-10 text-center">
+            <a
+              href={catalogUrl}
+              className="inline-flex items-center gap-2 text-terracotta font-semibold text-sm hover:text-terracotta-dark transition-colors"
+            >
+              {catalogLabel}
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        ) : null}
       </div>
     </section>
   );

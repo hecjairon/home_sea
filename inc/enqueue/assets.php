@@ -93,14 +93,57 @@ function homesea_theme_enqueue_assets(): void {
 		}
 	}
 
+	$view         = 'home';
+	$propiedad    = null;
+	$proyecto     = null;
+	$collection   = array();
+	$prop_catalog = function_exists( 'homesea_theme_propiedad_archive_url' )
+		? homesea_theme_propiedad_archive_url()
+		: home_url( '/propiedades/' );
+	$proj_catalog = function_exists( 'homesea_theme_proyecto_archive_url' )
+		? homesea_theme_proyecto_archive_url()
+		: home_url( '/proyectos/' );
+
+	if ( is_singular( 'propiedad' ) && function_exists( 'homesea_theme_propiedad_to_detail' ) ) {
+		$post = get_queried_object();
+		if ( ! $post instanceof WP_Post ) {
+			$post = get_post();
+		}
+		if ( $post instanceof WP_Post && 'propiedad' === $post->post_type ) {
+			$view      = 'propiedad';
+			$propiedad = homesea_theme_propiedad_to_detail( $post );
+		}
+	} elseif ( is_post_type_archive( 'propiedad' ) && function_exists( 'homesea_theme_query_propiedad_collection' ) ) {
+		$view       = 'propiedades-collection';
+		$collection = homesea_theme_query_propiedad_collection();
+	} elseif ( is_singular( 'proyecto' ) && function_exists( 'homesea_theme_proyecto_to_detail' ) ) {
+		$post = get_queried_object();
+		if ( ! $post instanceof WP_Post ) {
+			$post = get_post();
+		}
+		if ( $post instanceof WP_Post && 'proyecto' === $post->post_type ) {
+			$view     = 'proyecto';
+			$proyecto = homesea_theme_proyecto_to_detail( $post );
+		}
+	} elseif ( is_post_type_archive( 'proyecto' ) && function_exists( 'homesea_theme_query_proyecto_collection' ) ) {
+		$view       = 'proyectos-collection';
+		$collection = homesea_theme_query_proyecto_collection();
+	}
+
 	wp_localize_script(
 		$handle,
 		'homeSeaThemeData',
 		array(
-			'apiUrl'   => homesea_theme_rest_url( 'theme/v1/site' ),
-			'nonce'    => wp_create_nonce( 'wp_rest' ),
-			'homeUrl'  => esc_url_raw( home_url( '/' ) ),
-			'themeUri' => esc_url_raw( HOMESEA_THEME_URI ),
+			'apiUrl'                 => homesea_theme_rest_url( 'theme/v1/site' ),
+			'nonce'                  => wp_create_nonce( 'wp_rest' ),
+			'homeUrl'                => esc_url_raw( home_url( '/' ) ),
+			'collectionUrl'          => esc_url_raw( $prop_catalog ),
+			'projectsCollectionUrl'  => esc_url_raw( $proj_catalog ),
+			'themeUri'               => esc_url_raw( HOMESEA_THEME_URI ),
+			'view'                   => $view,
+			'propiedad'              => $propiedad,
+			'proyecto'               => $proyecto,
+			'collection'             => $collection,
 		)
 	);
 }

@@ -52,13 +52,15 @@ export const mockData = {
     eyebrow: 'Colección curada',
     title: 'Propiedades destacadas',
     catalog_label: 'Ver catálogo completo',
-    catalog_url: '#',
+    catalog_url: '/propiedades/',
     items: [
       {
+        id: 0,
+        title: 'Villa Golden Mile',
         image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&auto=format&fit=crop',
         image_alt: 'Villa mediterránea con terraza y vistas al mar en Marbella',
         badge: 'En venta',
-        badge_variant: 'terracotta',
+        badge_color: '#C45C26',
         price: '€ 1.850.000',
         location: 'Golden Mile, Marbella — Málaga',
         beds: 5,
@@ -67,10 +69,12 @@ export const mockData = {
         details_url: '#',
       },
       {
+        id: 0,
+        title: 'Finca Deià',
         image_url: 'https://images.unsplash.com/photo-1600047509806-ba53f78459ca?w=800&q=80&auto=format&fit=crop',
         image_alt: 'Finca rústica de lujo con olivos en Mallorca',
         badge: 'Exclusiva',
-        badge_variant: 'gold',
+        badge_color: '#C9A227',
         price: '€ 2.400.000',
         location: 'Deià, Mallorca — Baleares',
         beds: 6,
@@ -79,10 +83,12 @@ export const mockData = {
         details_url: '#',
       },
       {
+        id: 0,
+        title: 'Villa Begur',
         image_url: 'https://images.unsplash.com/photo-1600565893085-3571767115e6?w=800&q=80&auto=format&fit=crop',
         image_alt: 'Villa contemporánea con piscina en la Costa Brava',
         badge: 'En venta',
-        badge_variant: 'terracotta',
+        badge_color: '#C45C26',
         price: '€ 975.000',
         location: 'Begur, Costa Brava — Girona',
         beds: 4,
@@ -122,6 +128,8 @@ export const mockData = {
   projects: {
     eyebrow: 'Desarrollos selectos',
     title: 'Proyectos recientes',
+    catalog_label: 'Ver todos los proyectos',
+    catalog_url: '/proyectos/',
     items: [
       {
         image_url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&auto=format&fit=crop',
@@ -131,6 +139,7 @@ export const mockData = {
         title: 'Residencial Vista del Mar',
         location: 'Estepona, Málaga',
         url: '#',
+        details_url: '#',
       },
       {
         image_url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&auto=format&fit=crop',
@@ -140,6 +149,7 @@ export const mockData = {
         title: 'Fincas del Olivar',
         location: 'Sóller, Mallorca',
         url: '#',
+        details_url: '#',
       },
       {
         image_url: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80&auto=format&fit=crop',
@@ -149,6 +159,7 @@ export const mockData = {
         title: 'Villas Mediterráneo',
         location: 'Calpe, Alicante',
         url: '#',
+        details_url: '#',
       },
       {
         image_url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80&auto=format&fit=crop',
@@ -158,6 +169,7 @@ export const mockData = {
         title: 'Cortijo Blanco',
         location: 'Ronda, Málaga',
         url: '#',
+        details_url: '#',
       },
     ],
   },
