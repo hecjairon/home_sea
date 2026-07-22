@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Available Stats icon keys mapped to label + SVG URL.
+ * Available Stats icon keys — repositorio UI central.
  *
  * @return array<string, array{label: string, url: string}>
  */
 function homesea_theme_stats_icons(): array {
-	return homesea_theme_icons_map( array( 'home', 'users', 'clock', 'star' ) );
+	return homesea_theme_ui_icons();
 }
 
 /**
@@ -26,7 +26,7 @@ function homesea_theme_stats_icons(): array {
  * @return array<string, string>
  */
 function homesea_theme_stats_icon_options(): array {
-	return homesea_theme_icon_select_options_from( homesea_theme_stats_icons() );
+	return homesea_theme_ui_icon_options();
 }
 
 /**
@@ -35,7 +35,7 @@ function homesea_theme_stats_icon_options(): array {
  * @param mixed $value Raw value.
  */
 function homesea_theme_sanitize_stats_icon( mixed $value ): string {
-	return homesea_theme_sanitize_icon_key( $value, homesea_theme_stats_icons(), 'home' );
+	return homesea_theme_sanitize_icon_key( $value, homesea_theme_ui_icons(), 'home' );
 }
 
 /**
@@ -45,10 +45,7 @@ function homesea_theme_sanitize_stats_icon( mixed $value ): string {
  */
 function homesea_theme_stats_admin_assets( string $hook ): void {
 	unset( $hook );
-	homesea_theme_enqueue_icon_select_for_page(
-		'homesea_theme_stats_settings',
-		homesea_theme_stats_icons()
-	);
+	homesea_theme_enqueue_ui_icon_select( 'homesea_theme_stats_settings' );
 }
 add_action( 'admin_enqueue_scripts', 'homesea_theme_stats_admin_assets' );
 

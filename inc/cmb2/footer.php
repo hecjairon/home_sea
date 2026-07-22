@@ -12,21 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Icons available for Footer social networks.
+ * Icons available for Footer social networks — repositorio social central.
  *
  * @return array<string, array{label: string, url: string}>
  */
 function homesea_theme_footer_social_icons(): array {
-	return homesea_theme_icons_map(
-		array(
-			'instagram',
-			'linkedin',
-			'facebook',
-			'twitter',
-			'youtube',
-			'whatsapp',
-		)
-	);
+	return homesea_theme_social_icons();
 }
 
 /**
@@ -35,7 +26,7 @@ function homesea_theme_footer_social_icons(): array {
  * @return array<string, string>
  */
 function homesea_theme_footer_social_icon_options(): array {
-	return homesea_theme_icon_select_options_from( homesea_theme_footer_social_icons() );
+	return homesea_theme_social_icon_options();
 }
 
 /**
@@ -44,7 +35,7 @@ function homesea_theme_footer_social_icon_options(): array {
  * @param mixed $value Raw value.
  */
 function homesea_theme_sanitize_footer_social_icon( mixed $value ): string {
-	return homesea_theme_sanitize_icon_key( $value, homesea_theme_footer_social_icons(), 'instagram' );
+	return homesea_theme_sanitize_social_icon( $value );
 }
 
 /**
@@ -54,10 +45,7 @@ function homesea_theme_sanitize_footer_social_icon( mixed $value ): string {
  */
 function homesea_theme_footer_admin_assets( string $hook ): void {
 	unset( $hook );
-	homesea_theme_enqueue_icon_select_for_page(
-		'homesea_theme_footer_settings',
-		homesea_theme_footer_social_icons()
-	);
+	homesea_theme_enqueue_social_icon_select( 'homesea_theme_footer_settings' );
 }
 add_action( 'admin_enqueue_scripts', 'homesea_theme_footer_admin_assets' );
 

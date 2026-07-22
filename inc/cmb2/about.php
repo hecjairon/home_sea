@@ -12,31 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Icons available in the About module.
+ * Icons available in the About module — repositorio UI central.
  *
  * @return array<string, array{label: string, url: string}>
  */
 function homesea_theme_about_icons(): array {
-	return homesea_theme_icons_map(
-		array(
-			'heart',
-			'globe',
-			'shield',
-			'building',
-			'home',
-			'users',
-			'star',
-			'clock',
-			'key',
-			'map-pin',
-			'check',
-			'award',
-			'sparkles',
-			'phone',
-			'handshake',
-			'leaf',
-		)
-	);
+	return homesea_theme_ui_icons();
 }
 
 /**
@@ -45,7 +26,7 @@ function homesea_theme_about_icons(): array {
  * @return array<string, string>
  */
 function homesea_theme_about_icon_options(): array {
-	return homesea_theme_icon_select_options_from( homesea_theme_about_icons() );
+	return homesea_theme_ui_icon_options();
 }
 
 /**
@@ -54,7 +35,7 @@ function homesea_theme_about_icon_options(): array {
  * @param mixed $value Raw value.
  */
 function homesea_theme_sanitize_about_icon( mixed $value ): string {
-	return homesea_theme_sanitize_icon_key( $value, homesea_theme_about_icons(), 'heart' );
+	return homesea_theme_sanitize_icon_key( $value, homesea_theme_ui_icons(), 'heart' );
 }
 
 /**
@@ -64,10 +45,7 @@ function homesea_theme_sanitize_about_icon( mixed $value ): string {
  */
 function homesea_theme_about_admin_assets( string $hook ): void {
 	unset( $hook );
-	homesea_theme_enqueue_icon_select_for_page(
-		'homesea_theme_about_settings',
-		homesea_theme_about_icons()
-	);
+	homesea_theme_enqueue_ui_icon_select( 'homesea_theme_about_settings' );
 }
 add_action( 'admin_enqueue_scripts', 'homesea_theme_about_admin_assets' );
 
