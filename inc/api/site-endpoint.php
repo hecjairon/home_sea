@@ -2,7 +2,7 @@
 /**
  * REST API — GET /wp-json/theme/v1/site
  *
- * Assembles nested Casa Noble JSON from CMB2 options (flat keys + groups),
+ * Assembles nested Villa Hermosa JSON from CMB2 options (flat keys + groups),
  * falling back to defaults when options are empty.
  *
  * @package HomeSeaTheme

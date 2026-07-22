@@ -26,8 +26,8 @@ function homesea_theme_cmb2_header(): void {
 	}
 
 	$text_fields = array(
-		'logo_first' => array( 'name' => __( 'Logo — primera parte', 'homesea_theme' ), 'default' => 'Casa' ),
-		'logo_second' => array( 'name' => __( 'Logo — segunda parte', 'homesea_theme' ), 'default' => 'Noble' ),
+		'logo_first' => array( 'name' => __( 'Logo — primera parte', 'homesea_theme' ), 'default' => 'villa' ),
+		'logo_second' => array( 'name' => __( 'Logo — segunda parte', 'homesea_theme' ), 'default' => 'HERMOSA' ),
 		'cta_label'  => array( 'name' => __( 'CTA label', 'homesea_theme' ), 'default' => 'Reserva una visita' ),
 	);
 

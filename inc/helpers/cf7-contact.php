@@ -75,7 +75,7 @@ function homesea_theme_cf7_persist_form_id( int $form_id ): void {
 }
 
 /**
- * CF7 form template markup for Casa Noble.
+ * CF7 form template markup for Villa Hermosa.
  */
 function homesea_theme_cf7_form_template(): string {
 	return implode(
@@ -89,7 +89,7 @@ function homesea_theme_cf7_form_template(): string {
 			'    [tel* your-phone autocomplete:tel] </label>',
 			'<label> Mensaje',
 			'    [textarea your-message] </label>',
-			'[hidden your-subject "Solicitud de contacto Casa Noble"]',
+			'[hidden your-subject "Solicitud de contacto Villa Hermosa"]',
 			'[submit "Quiero que me contacten"]',
 		)
 	);
@@ -114,7 +114,7 @@ function homesea_theme_cf7_ensure_contact_form(): int {
 		}
 	}
 
-	// Prefer already-created Casa Noble form by title.
+	// Prefer already-created Villa Hermosa form by title.
 	$posts = get_posts(
 		array(
 			'post_type'              => 'wpcf7_contact_form',
@@ -129,7 +129,7 @@ function homesea_theme_cf7_ensure_contact_form(): int {
 	);
 
 	foreach ( $posts as $post ) {
-		if ( 'Contacto Casa Noble' === $post->post_title ) {
+		if ( 'Contacto Villa Hermosa' === $post->post_title ) {
 			homesea_theme_cf7_persist_form_id( (int) $post->ID );
 			return (int) $post->ID;
 		}
@@ -137,7 +137,7 @@ function homesea_theme_cf7_ensure_contact_form(): int {
 
 	$contact_form = WPCF7_ContactForm::get_template(
 		array(
-			'title' => 'Contacto Casa Noble',
+			'title' => 'Contacto Villa Hermosa',
 		)
 	);
 

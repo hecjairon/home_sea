@@ -43,7 +43,7 @@ function homesea_theme_cmb2_contact(): void {
 		'label_mensaje' => array( 'name' => __( 'Label — mensaje', 'homesea_theme' ), 'default' => 'Mensaje' ),
 		'ph_mensaje'   => array( 'name' => __( 'Placeholder — mensaje', 'homesea_theme' ), 'default' => 'Cuéntanos qué tipo de propiedad mediterránea buscas...' ),
 		'success_title' => array( 'name' => __( 'Éxito — título', 'homesea_theme' ), 'default' => '¡Mensaje enviado!' ),
-		'success_message' => array( 'name' => __( 'Éxito — mensaje', 'homesea_theme' ), 'default' => 'Un asesor de Casa Noble te contactará en menos de 24 horas.' ),
+		'success_message' => array( 'name' => __( 'Éxito — mensaje', 'homesea_theme' ), 'default' => 'Un asesor de Villa Hermosa te contactará en menos de 24 horas.' ),
 	);
 
 	foreach ( $text_fields as $id => $cfg ) {
@@ -64,7 +64,7 @@ function homesea_theme_cmb2_contact(): void {
 			'name'            => __( 'Cuerpo', 'homesea_theme' ),
 			'id'              => 'body',
 			'type'            => 'textarea',
-			'default'         => 'Completa el formulario y un asesor de Casa Noble te contactará en menos de 24 horas. Sin compromiso, con la calidez que nos caracteriza.',
+			'default'         => 'Completa el formulario y un asesor de Villa Hermosa te contactará en menos de 24 horas. Sin compromiso, con la calidez que nos caracteriza.',
 			'sanitization_cb' => 'sanitize_textarea_field',
 			'show_in_rest'    => WP_REST_Server::READABLE,
 		)
@@ -84,7 +84,7 @@ function homesea_theme_cmb2_contact(): void {
 	$cmb->add_field(
 		array(
 			'name' => __( 'Contact Form 7', 'homesea_theme' ),
-			'desc' => __( 'El formulario React envía a CF7 vía REST. Si el ID está vacío, el theme crea «Contacto Casa Noble». Con Flamingo activo, los mensajes se guardan en la base de datos.', 'homesea_theme' ),
+			'desc' => __( 'El formulario React envía a CF7 vía REST. Si el ID está vacío, el theme crea «Contacto Villa Hermosa». Con Flamingo activo, los mensajes se guardan en la base de datos.', 'homesea_theme' ),
 			'id'   => 'cf7_heading',
 			'type' => 'title',
 		)

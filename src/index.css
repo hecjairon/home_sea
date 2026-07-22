@@ -1,20 +1,33 @@
 @import "tailwindcss";
 
+/* Villa Hermosa — manual corporativo
+   Tokens Tailwind conservan nombres legacy (terracotta/gold/cream)
+   mapeados a la paleta oficial para no romper componentes. */
+
 @theme {
-  --font-display: "Libre Baskerville", "Georgia", serif;
-  --font-sans: "Inter", "Segoe UI", sans-serif;
-  --color-cream: #fbf7f0;
-  --color-cream-dark: #f3ebd9;
-  --color-terracotta: #b8734a;
-  --color-terracotta-light: #d4956e;
-  --color-terracotta-dark: #9a5e38;
-  --color-navy: #163a70;
-  --color-navy-dark: #0f2a52;
-  --color-navy-light: #1e4d8c;
-  --color-gold: #c9a962;
-  --color-gold-light: #e8d5a3;
-  --color-warm-shadow: rgba(154, 94, 56, 0.12);
-  --color-warm-border: rgba(184, 115, 74, 0.15);
+  --font-display: "Montserrat", "Segoe UI", sans-serif;
+  --font-sans: "Montserrat", "Segoe UI", sans-serif;
+
+  /* Surface (antes cream) */
+  --color-cream: #ffffff;
+  --color-cream-dark: #f4f7fb;
+
+  /* Acento verde #84BE3F (antes terracotta) */
+  --color-terracotta: #84be3f;
+  --color-terracotta-light: #9ad05a;
+  --color-terracotta-dark: #6a9a2f;
+
+  /* Azul corporativo #174696 (antes navy) */
+  --color-navy: #174696;
+  --color-navy-dark: #0f3470;
+  --color-navy-light: #2a5cad;
+
+  /* Acento secundario → verde claro (antes gold) */
+  --color-gold: #84be3f;
+  --color-gold-light: #b8e07a;
+
+  --color-warm-shadow: rgba(23, 70, 150, 0.14);
+  --color-warm-border: rgba(23, 70, 150, 0.12);
 }
 
 @layer base {
@@ -24,34 +37,34 @@
 
   body {
     font-family: var(--font-sans);
-    color: #1f2937;
+    color: #1a2332;
     background: var(--color-cream);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: rgba(184, 115, 74, 0.2);
+    background-color: rgba(132, 190, 63, 0.25);
     color: var(--color-navy);
   }
 }
 
-/* Casa Noble design utilities */
+/* Villa Hermosa design utilities */
 .search-card {
   background: var(--color-cream);
   border: 1px solid var(--color-warm-border);
   box-shadow:
-    0 4px 6px -1px rgba(154, 94, 56, 0.06),
-    0 20px 50px -12px rgba(154, 94, 56, 0.18),
+    0 4px 6px -1px rgba(23, 70, 150, 0.06),
+    0 20px 50px -12px var(--color-warm-shadow),
     0 0 0 1px rgba(255, 255, 255, 0.6) inset;
 }
 
 .hero-warm-overlay {
   background: linear-gradient(
     135deg,
-    rgba(15, 42, 82, 0.72) 0%,
-    rgba(154, 94, 56, 0.45) 45%,
-    rgba(22, 58, 112, 0.55) 100%
+    rgba(23, 70, 150, 0.82) 0%,
+    rgba(15, 52, 112, 0.55) 50%,
+    rgba(23, 70, 150, 0.7) 100%
   );
 }
 
@@ -59,24 +72,24 @@
   position: absolute;
   pointer-events: none;
   filter: blur(60px);
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .blob-organic-1 {
   border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
-  background: radial-gradient(circle, rgba(184, 115, 74, 0.35) 0%, rgba(201, 169, 98, 0.15) 70%);
+  background: radial-gradient(circle, rgba(132, 190, 63, 0.35) 0%, rgba(23, 70, 150, 0.12) 70%);
   animation: blob-float 12s ease-in-out infinite;
 }
 
 .blob-organic-2 {
   border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
-  background: radial-gradient(circle, rgba(201, 169, 98, 0.3) 0%, rgba(184, 115, 74, 0.1) 70%);
+  background: radial-gradient(circle, rgba(23, 70, 150, 0.28) 0%, rgba(132, 190, 63, 0.1) 70%);
   animation: blob-float 15s ease-in-out infinite reverse;
 }
 
 .blob-organic-3 {
   border-radius: 50% 50% 45% 55% / 40% 60% 50% 50%;
-  background: radial-gradient(circle, rgba(22, 58, 112, 0.12) 0%, rgba(184, 115, 74, 0.08) 70%);
+  background: radial-gradient(circle, rgba(23, 70, 150, 0.14) 0%, rgba(132, 190, 63, 0.08) 70%);
   animation: blob-float 18s ease-in-out infinite;
 }
 
@@ -94,23 +107,23 @@
 }
 
 .navbar-scrolled {
-  background: rgba(251, 247, 240, 0.95) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--color-warm-border);
-  box-shadow: 0 4px 24px rgba(154, 94, 56, 0.08);
+  box-shadow: 0 4px 24px rgba(23, 70, 150, 0.08);
 }
 
 .terracotta-line {
   width: 48px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-terracotta), var(--color-gold));
+  height: 3px;
+  background: var(--color-terracotta);
   border-radius: 2px;
 }
 
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(184, 115, 74, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(23, 70, 150, 0.18), transparent);
 }
 
 .warm-surface {
@@ -151,28 +164,28 @@
 
 .feature-card:hover .feature-icon {
   transform: scale(1.08);
-  background: rgba(184, 115, 74, 0.12);
+  background: rgba(132, 190, 63, 0.16);
 }
 
 .feature-icon {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease;
-  background: rgba(184, 115, 74, 0.08);
+  background: rgba(132, 190, 63, 0.12);
 }
 
 .testimonial-warm-card {
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(201, 169, 98, 0.2);
+  border: 1px solid rgba(132, 190, 63, 0.25);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
 .timeline-line {
-  background: linear-gradient(90deg, var(--color-terracotta), var(--color-gold), var(--color-terracotta));
+  background: linear-gradient(90deg, var(--color-navy), var(--color-terracotta), var(--color-navy));
   height: 2px;
 }
 
 .map-container {
-  background: linear-gradient(135deg, var(--color-cream-dark) 0%, #e8dfc8 100%);
+  background: linear-gradient(135deg, var(--color-cream-dark) 0%, #e2eaf5 100%);
   position: relative;
   overflow: hidden;
 }
@@ -218,12 +231,22 @@
 
 .form-input:focus {
   border-color: var(--color-terracotta);
-  box-shadow: 0 0 0 3px rgba(184, 115, 74, 0.12);
+  box-shadow: 0 0 0 3px rgba(132, 190, 63, 0.2);
   outline: none;
 }
 
 .btn-terracotta-glow:hover {
-  box-shadow: 0 8px 32px rgba(184, 115, 74, 0.35);
+  box-shadow: 0 8px 32px rgba(132, 190, 63, 0.35);
+}
+
+.logo-mark {
+  height: 2.75rem;
+  width: auto;
+  display: block;
+}
+
+.logo-mark--footer {
+  height: 3.25rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

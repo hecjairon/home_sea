@@ -76,10 +76,10 @@ function homesea_theme_cmb2_footer(): void {
 	}
 
 	$text_fields = array(
-		'brand'        => array( 'name' => __( 'Marca', 'homesea_theme' ), 'default' => 'Casa Noble' ),
-		'brand_first'  => array( 'name' => __( 'Marca — primera parte', 'homesea_theme' ), 'default' => 'Casa' ),
-		'brand_second' => array( 'name' => __( 'Marca — segunda parte', 'homesea_theme' ), 'default' => 'Noble' ),
-		'copyright'    => array( 'name' => __( 'Copyright', 'homesea_theme' ), 'default' => '© 2026 Casa Noble Inmobiliaria. Todos los derechos reservados.' ),
+		'brand'        => array( 'name' => __( 'Marca', 'homesea_theme' ), 'default' => 'Villa Hermosa' ),
+		'brand_first'  => array( 'name' => __( 'Marca — primera parte', 'homesea_theme' ), 'default' => 'villa' ),
+		'brand_second' => array( 'name' => __( 'Marca — segunda parte', 'homesea_theme' ), 'default' => 'HERMOSA' ),
+		'copyright'    => array( 'name' => __( 'Copyright', 'homesea_theme' ), 'default' => '© 2026 Villa Hermosa Inmobiliaria. Todos los derechos reservados.' ),
 	);
 
 	foreach ( $text_fields as $id => $cfg ) {

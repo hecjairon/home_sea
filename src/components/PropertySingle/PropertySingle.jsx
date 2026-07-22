@@ -17,7 +17,7 @@ export default function PropertySingle({ data, property }) {
     typeof window !== 'undefined'
       ? window.homeSeaThemeData?.collectionUrl || `${window.homeSeaThemeData?.homeUrl || '/'}#propiedades`
       : '/propiedades/';
-  const badgeColor = property.badge_color || '#C45C26';
+  const badgeColor = property.badge_color || '#84BE3F';
   const gallery = Array.isArray(property.images) ? property.images.filter((img) => img?.url) : [];
 
   return (

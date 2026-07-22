@@ -1,11 +1,11 @@
 /**
- * Casa Noble mock site data — mirrors design/index.html content.
+ * Villa Hermosa mock site data — mirrors design/index.html content.
  * Production does not depend on this file: REST + PHP `site-defaults.php` are the source of truth.
  * Used only as a development fallback when the API is unreachable.
  */
 export const mockData = {
   header: {
-    logo_text_parts: { first: 'Casa', second: 'Noble' },
+    logo_text_parts: { first: 'villa', second: 'HERMOSA' },
     nav: [
       { label: 'Inicio', url: '#inicio' },
       { label: 'Propiedades', url: '#propiedades' },
@@ -60,7 +60,7 @@ export const mockData = {
         image_url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&auto=format&fit=crop',
         image_alt: 'Villa mediterránea con terraza y vistas al mar en Marbella',
         badge: 'En venta',
-        badge_color: '#C45C26',
+        badge_color: '#84BE3F',
         price: '€ 1.850.000',
         location: 'Golden Mile, Marbella — Málaga',
         beds: 5,
@@ -74,7 +74,7 @@ export const mockData = {
         image_url: 'https://images.unsplash.com/photo-1600047509806-ba53f78459ca?w=800&q=80&auto=format&fit=crop',
         image_alt: 'Finca rústica de lujo con olivos en Mallorca',
         badge: 'Exclusiva',
-        badge_color: '#C9A227',
+        badge_color: '#174696',
         price: '€ 2.400.000',
         location: 'Deià, Mallorca — Baleares',
         beds: 6,
@@ -88,7 +88,7 @@ export const mockData = {
         image_url: 'https://images.unsplash.com/photo-1600565893085-3571767115e6?w=800&q=80&auto=format&fit=crop',
         image_alt: 'Villa contemporánea con piscina en la Costa Brava',
         badge: 'En venta',
-        badge_color: '#C45C26',
+        badge_color: '#84BE3F',
         price: '€ 975.000',
         location: 'Begur, Costa Brava — Girona',
         beds: 4,
@@ -100,7 +100,7 @@ export const mockData = {
   },
   about: {
     eyebrow: 'Nuestra esencia',
-    title: '¿Por qué Casa Noble?',
+    title: '¿Por qué Villa Hermosa?',
     body: 'No vendemos metros cuadrados: acompañamos decisiones de vida con la calidez de quien conoce cada rincón del Mediterráneo.',
     items: [
       {
@@ -179,7 +179,7 @@ export const mockData = {
     items: [
       {
         quote:
-          'Compramos nuestra villa en Marbella con Casa Noble. Elena nos acompañó durante ocho meses con paciencia infinita. Sentimos que teníamos a alguien de confianza, no a un vendedor.',
+          'Compramos nuestra villa en Marbella con Villa Hermosa. Elena nos acompañó durante ocho meses con paciencia infinita. Sentimos que teníamos a alguien de confianza, no a un vendedor.',
         name: 'Isabel Moreno',
         location: 'Marbella, Málaga',
         avatar_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&auto=format&fit=crop',
@@ -187,7 +187,7 @@ export const mockData = {
       },
       {
         quote:
-          'Desde Suiza buscábamos una finca en Mallorca. Casa Noble coordinó visitas virtuales, traducciones y toda la parte legal. Hoy disfrutamos de nuestra casa de verano sin haber tenido que viajar diez veces.',
+          'Desde Suiza buscábamos una finca en Mallorca. Villa Hermosa coordinó visitas virtuales, traducciones y toda la parte legal. Hoy disfrutamos de nuestra casa de verano sin haber tenido que viajar diez veces.',
         name: 'Thomas Weber',
         location: 'Deià, Mallorca',
         avatar_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop',
@@ -223,7 +223,7 @@ export const mockData = {
   contact: {
     eyebrow: 'Contacto',
     title: 'Cuéntanos qué buscas',
-    body: 'Completa el formulario y un asesor de Casa Noble te contactará en menos de 24 horas. Sin compromiso, con la calidez que nos caracteriza.',
+    body: 'Completa el formulario y un asesor de Villa Hermosa te contactará en menos de 24 horas. Sin compromiso, con la calidez que nos caracteriza.',
     phone: '+34 952 123 456',
     email: 'hola@casanoble.es',
     submit_label: 'Quiero que me contacten',
@@ -258,13 +258,13 @@ export const mockData = {
       phone_label: 'Teléfono',
       email_label: 'Correo',
       success_title: '¡Mensaje enviado!',
-      success_message: 'Un asesor de Casa Noble te contactará en menos de 24 horas.',
+      success_message: 'Un asesor de Villa Hermosa te contactará en menos de 24 horas.',
       submit_error: 'No se pudo enviar el mensaje. Inténtalo de nuevo.',
     },
   },
   footer: {
-    brand: 'Casa Noble',
-    brand_parts: { first: 'Casa', second: 'Noble' },
+    brand: 'Villa Hermosa',
+    brand_parts: { first: 'villa', second: 'HERMOSA' },
     tagline: 'Tu aliado de confianza en el mercado inmobiliario mediterráneo. Desde 2008 conectando familias con hogares que tienen alma.',
     socials: [
       { label: 'Instagram', url: '#', icon: 'instagram' },
@@ -282,11 +282,11 @@ export const mockData = {
       { label: 'Política de privacidad', url: '#' },
       { label: 'Términos y condiciones', url: '#' },
     ],
-    copyright: '© 2026 Casa Noble Inmobiliaria. Todos los derechos reservados.',
+    copyright: '© 2026 Villa Hermosa Inmobiliaria. Todos los derechos reservados.',
   },
   seo: {
-    title: 'Casa Noble | Inmobiliaria Premium Mediterránea — Tu hogar con alma',
+    title: 'Villa Hermosa | Inmobiliaria Premium Mediterránea — Tu hogar con alma',
     description:
-      'Casa Noble: propiedades mediterráneas de lujo en la Costa del Sol, Mallorca y la Riviera. Más de 18 años conectando familias con villas, fincas y residencias con carácter y calidez.',
+      'Villa Hermosa: propiedades mediterráneas de lujo en la Costa del Sol, Mallorca y la Riviera. Más de 18 años conectando familias con villas, fincas y residencias con carácter y calidez.',
   },
 };

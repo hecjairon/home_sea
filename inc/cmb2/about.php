@@ -87,7 +87,7 @@ function homesea_theme_cmb2_about(): void {
 
 	$text_fields = array(
 		'eyebrow' => array( 'name' => __( 'Eyebrow', 'homesea_theme' ), 'default' => 'Nuestra esencia' ),
-		'title'   => array( 'name' => __( 'Título', 'homesea_theme' ), 'default' => '¿Por qué Casa Noble?' ),
+		'title'   => array( 'name' => __( 'Título', 'homesea_theme' ), 'default' => '¿Por qué Villa Hermosa?' ),
 	);
 
 	foreach ( $text_fields as $id => $cfg ) {

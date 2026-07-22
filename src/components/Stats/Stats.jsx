@@ -32,7 +32,7 @@ export default function Stats({ items }) {
       <div className="section-divider absolute top-0 left-0 right-0" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <h2 id="stats-heading" className="sr-only">
-          Estadísticas de Casa Noble
+          Estadísticas de Villa Hermosa
         </h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {items.map((item, index) => (

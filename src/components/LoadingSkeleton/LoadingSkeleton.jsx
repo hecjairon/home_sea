@@ -11,7 +11,7 @@ export default function LoadingSkeleton() {
             <div key={i} className="h-48 animate-pulse rounded-3xl bg-white border border-terracotta/10" />
           ))}
         </div>
-        <p className="mt-10 text-center font-display text-sm text-terracotta tracking-widest uppercase">Casa Noble</p>
+        <p className="mt-10 text-center font-display text-sm text-terracotta tracking-widest uppercase">Villa Hermosa</p>
       </div>
     </div>
   );

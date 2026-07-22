@@ -30,7 +30,7 @@ function homesea_theme_cmb2_seo(): void {
 			'name'            => __( 'Meta title', 'homesea_theme' ),
 			'id'              => 'title',
 			'type'            => 'text',
-			'default'         => 'Casa Noble | Inmobiliaria Premium Mediterránea — Tu hogar con alma',
+			'default'         => 'Villa Hermosa | Inmobiliaria Premium Mediterránea — Tu hogar con alma',
 			'sanitization_cb' => 'sanitize_text_field',
 			'show_in_rest'    => WP_REST_Server::READABLE,
 		)
@@ -41,7 +41,7 @@ function homesea_theme_cmb2_seo(): void {
 			'name'            => __( 'Meta description', 'homesea_theme' ),
 			'id'              => 'description',
 			'type'            => 'textarea_small',
-			'default'         => 'Casa Noble: propiedades mediterráneas de lujo en la Costa del Sol, Mallorca y la Riviera. Más de 18 años conectando familias con villas, fincas y residencias con carácter y calidez.',
+			'default'         => 'Villa Hermosa: propiedades mediterráneas de lujo en la Costa del Sol, Mallorca y la Riviera. Más de 18 años conectando familias con villas, fincas y residencias con carácter y calidez.',
 			'sanitization_cb' => 'sanitize_textarea_field',
 			'show_in_rest'    => WP_REST_Server::READABLE,
 		)

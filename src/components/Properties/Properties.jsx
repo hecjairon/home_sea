@@ -54,7 +54,7 @@ export default function Properties({ data }) {
                 {item.badge ? (
                   <span
                     className="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full text-white"
-                    style={{ backgroundColor: item.badge_color || '#C45C26' }}
+                    style={{ backgroundColor: item.badge_color || '#84BE3F' }}
                   >
                     {item.badge}
                   </span>

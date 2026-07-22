@@ -1,6 +1,6 @@
 <?php
 /**
- * Casa Noble default site payload (mirrors src/services/mockData.js).
+ * Villa Hermosa default site payload (mirrors src/services/mockData.js).
  * Used when CMB2 options are empty (not yet saved).
  *
  * @package HomeSeaTheme
@@ -21,8 +21,8 @@ function homesea_theme_site_defaults(): array {
 	return array(
 		'header' => array(
 			'logo_text_parts' => array(
-				'first'  => 'Casa',
-				'second' => 'Noble',
+				'first'  => 'villa',
+				'second' => 'HERMOSA',
 			),
 			'nav'       => array(
 				array( 'label' => 'Inicio', 'url' => '#inicio' ),
@@ -137,7 +137,7 @@ function homesea_theme_site_defaults(): array {
 		),
 		'about' => array(
 			'eyebrow' => 'Nuestra esencia',
-			'title'   => '¿Por qué Casa Noble?',
+			'title'   => '¿Por qué Villa Hermosa?',
 			'body'    => 'No vendemos metros cuadrados: acompañamos decisiones de vida con la calidez de quien conoce cada rincón del Mediterráneo.',
 			'items'   => array(
 				array(
@@ -215,14 +215,14 @@ function homesea_theme_site_defaults(): array {
 			'title'   => 'Historias de familias que confiaron en nosotros',
 			'items'   => array(
 				array(
-					'quote'      => 'Compramos nuestra villa en Marbella con Casa Noble. Elena nos acompañó durante ocho meses con paciencia infinita. Sentimos que teníamos a alguien de confianza, no a un vendedor.',
+					'quote'      => 'Compramos nuestra villa en Marbella con Villa Hermosa. Elena nos acompañó durante ocho meses con paciencia infinita. Sentimos que teníamos a alguien de confianza, no a un vendedor.',
 					'name'       => 'Isabel Moreno',
 					'location'   => 'Marbella, Málaga',
 					'avatar_url' => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&auto=format&fit=crop',
 					'rating'     => 5,
 				),
 				array(
-					'quote'      => 'Desde Suiza buscábamos una finca en Mallorca. Casa Noble coordinó visitas virtuales, traducciones y toda la parte legal. Hoy disfrutamos de nuestra casa de verano sin haber tenido que viajar diez veces.',
+					'quote'      => 'Desde Suiza buscábamos una finca en Mallorca. Villa Hermosa coordinó visitas virtuales, traducciones y toda la parte legal. Hoy disfrutamos de nuestra casa de verano sin haber tenido que viajar diez veces.',
 					'name'       => 'Thomas Weber',
 					'location'   => 'Deià, Mallorca',
 					'avatar_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop',
@@ -282,7 +282,7 @@ function homesea_theme_site_defaults(): array {
 		'contact' => array(
 			'eyebrow'      => 'Contacto',
 			'title'        => 'Cuéntanos qué buscas',
-			'body'         => 'Completa el formulario y un asesor de Casa Noble te contactará en menos de 24 horas. Sin compromiso, con la calidez que nos caracteriza.',
+			'body'         => 'Completa el formulario y un asesor de Villa Hermosa te contactará en menos de 24 horas. Sin compromiso, con la calidez que nos caracteriza.',
 			'phone'        => '+34 952 123 456',
 			'email'        => 'hola@casanoble.es',
 			'submit_label' => 'Quiero que me contacten',
@@ -317,15 +317,15 @@ function homesea_theme_site_defaults(): array {
 				'phone_label'         => 'Teléfono',
 				'email_label'         => 'Correo',
 				'success_title'       => '¡Mensaje enviado!',
-				'success_message'     => 'Un asesor de Casa Noble te contactará en menos de 24 horas.',
+				'success_message'     => 'Un asesor de Villa Hermosa te contactará en menos de 24 horas.',
 				'submit_error'        => 'No se pudo enviar el mensaje. Inténtalo de nuevo.',
 			),
 		),
 		'footer' => array(
-			'brand'         => 'Casa Noble',
+			'brand'         => 'Villa Hermosa',
 			'brand_parts'   => array(
-				'first'  => 'Casa',
-				'second' => 'Noble',
+				'first'  => 'villa',
+				'second' => 'HERMOSA',
 			),
 			'tagline'       => 'Tu aliado de confianza en el mercado inmobiliario mediterráneo. Desde 2008 conectando familias con hogares que tienen alma.',
 			'socials'       => array(
@@ -349,11 +349,11 @@ function homesea_theme_site_defaults(): array {
 				array( 'label' => 'Política de privacidad', 'url' => '#' ),
 				array( 'label' => 'Términos y condiciones', 'url' => '#' ),
 			),
-			'copyright'     => '© 2026 Casa Noble Inmobiliaria. Todos los derechos reservados.',
+			'copyright'     => '© 2026 Villa Hermosa Inmobiliaria. Todos los derechos reservados.',
 		),
 		'seo' => array(
-			'title'       => 'Casa Noble | Inmobiliaria Premium Mediterránea — Tu hogar con alma',
-			'description' => 'Casa Noble: propiedades mediterráneas de lujo en la Costa del Sol, Mallorca y la Riviera. Más de 18 años conectando familias con villas, fincas y residencias con carácter y calidez.',
+			'title'       => 'Villa Hermosa | Inmobiliaria Premium Mediterránea — Tu hogar con alma',
+			'description' => 'Villa Hermosa: propiedades mediterráneas de lujo en la Costa del Sol, Mallorca y la Riviera. Más de 18 años conectando familias con villas, fincas y residencias con carácter y calidez.',
 		),
 	);
 }

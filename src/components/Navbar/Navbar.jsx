@@ -1,12 +1,5 @@
 import { useEffect, useState } from 'react';
-
-function HouseIcon({ className = 'w-8 h-8 text-gold' }) {
-  return (
-    <svg className={className} viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-      <path d="M16 3L3 14h3v13h7v-8h6v8h7V14h3L16 3zm0 4.5l7 6.2V25h-3v-8h-8v8H9v-11.3l7-6.2z" />
-    </svg>
-  );
-}
+import logoUrl from '../../assets/logo.svg';
 
 /**
  * @param {{ data: { logo_text_parts?: { first: string, second: string }, brand?: { first: string, second: string }, nav: Array<{label: string, url: string}>, cta_label: string, cta_url: string } }} props
@@ -15,7 +8,8 @@ export default function Navbar({ data }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const brand = data.logo_text_parts || data.brand || { first: 'Casa', second: 'Noble' };
+  const brand = data.logo_text_parts || data.brand || { first: 'villa', second: 'HERMOSA' };
+  const brandLabel = `${brand.first} ${brand.second}`.trim();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -41,14 +35,14 @@ export default function Navbar({ data }) {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <a href="#inicio" className="flex items-center gap-2.5 group" aria-label="Casa Noble — Inicio">
-              <HouseIcon />
-              <span
-                className={`logo-text font-display text-xl font-bold tracking-wide transition-colors duration-300 ${scrolled ? 'text-navy' : 'text-white'}`}
-              >
-                {brand.first}{' '}
-                <span className="text-gold italic">{brand.second}</span>
-              </span>
+            <a href="#inicio" className="flex items-center gap-2.5 group" aria-label={`${brandLabel} — Inicio`}>
+              <img
+                src={logoUrl}
+                alt={brandLabel}
+                className={`logo-mark transition-[filter] duration-300 ${scrolled ? '' : 'brightness-0 invert'}`}
+                width="160"
+                height="68"
+              />
             </a>
 
             <ul className="hidden lg:flex items-center gap-8" role="list">

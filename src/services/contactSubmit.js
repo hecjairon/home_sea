@@ -37,7 +37,7 @@ export async function submitContactToCf7(values, cf7) {
   if (fields.mensaje) body.append(fields.mensaje, values.mensaje.trim());
 
   // Hidden CF7 subject used by Flamingo listing / mail subject tags.
-  body.append('your-subject', 'Solicitud de contacto Casa Noble');
+  body.append('your-subject', 'Solicitud de contacto Villa Hermosa');
 
   const response = await fetch(cf7.rest_url, {
     method: 'POST',
