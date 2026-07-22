@@ -39,13 +39,31 @@ function homesea_theme_sanitize_about_icon( mixed $value ): string {
 }
 
 /**
- * Enqueue icon select assets on the About settings page.
+ * Enqueue icon select + field toggle on the About settings page.
  *
  * @param string $hook Current admin page hook.
  */
 function homesea_theme_about_admin_assets( string $hook ): void {
 	unset( $hook );
+
+	$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+	if ( 'homesea_theme_about_settings' !== $page ) {
+		return;
+	}
+
 	homesea_theme_enqueue_ui_icon_select( 'homesea_theme_about_settings' );
+
+	$js = HOMESEA_THEME_DIR . '/assets/admin/field-toggle.js';
+	if ( file_exists( $js ) ) {
+		wp_enqueue_script(
+			'homesea-field-toggle',
+			HOMESEA_THEME_URI . '/assets/admin/field-toggle.js',
+			array( 'jquery' ),
+			(string) filemtime( $js ),
+			true
+		);
+	}
 }
 add_action( 'admin_enqueue_scripts', 'homesea_theme_about_admin_assets' );
 
@@ -92,11 +110,34 @@ function homesea_theme_cmb2_about(): void {
 		)
 	);
 
+	$cmb->add_field(
+		array(
+			'name'            => __( 'Mostrar ítems', 'homesea_theme' ),
+			'desc'            => __( 'Si eliges No, se oculta el grupo de ítems en este panel y en el front.', 'homesea_theme' ),
+			'id'              => 'show_items',
+			'type'            => 'select',
+			'default'         => 'yes',
+			'options'         => array(
+				'yes' => __( 'Sí', 'homesea_theme' ),
+				'no'  => __( 'No', 'homesea_theme' ),
+			),
+			'sanitization_cb' => static function ( $value ): string {
+				return 'no' === (string) $value ? 'no' : 'yes';
+			},
+			'show_in_rest'    => WP_REST_Server::READABLE,
+			'attributes'      => array(
+				'data-homesea-toggle-group' => '1',
+				'data-toggle-target'        => 'homesea-about-items-group',
+			),
+		)
+	);
+
 	$group_id = $cmb->add_field(
 		array(
 			'name'         => __( 'Ítems', 'homesea_theme' ),
 			'id'           => 'items',
 			'type'         => 'group',
+			'classes'      => 'homesea-about-items-group',
 			'repeatable'   => true,
 			'options'      => array(
 				'group_title'   => __( 'Ítem {#}', 'homesea_theme' ),

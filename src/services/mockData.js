@@ -102,6 +102,7 @@ export const mockData = {
     eyebrow: 'Nuestra esencia',
     title: '¿Por qué Villa Hermosa?',
     body: 'No vendemos metros cuadrados: acompañamos decisiones de vida con la calidez de quien conoce cada rincón del Mediterráneo.',
+    show_items: true,
     items: [
       {
         title: 'Trato cercano',
@@ -123,6 +124,17 @@ export const mockData = {
         description: 'Arquitectos, abogados, gestores y artesanos de confianza para reformar y personalizar tu hogar.',
         icon: 'building',
       },
+    ],
+  },
+  values: {
+    title: 'Nuestros valores:',
+    items: [
+      { icon: 'clock', label: 'PUNTUALIDAD' },
+      { icon: 'handshake', label: 'RESPETO' },
+      { icon: 'globe-hands', label: 'RESPONSABILIDAD' },
+      { icon: 'loyalty', label: 'LEALTAD' },
+      { icon: 'chart-up', label: 'LIDERAZGO' },
+      { icon: 'scales', label: 'ÉTICA' },
     ],
   },
   projects: {

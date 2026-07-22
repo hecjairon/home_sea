@@ -136,10 +136,11 @@ function homesea_theme_site_defaults(): array {
 			),
 		),
 		'about' => array(
-			'eyebrow' => 'Nuestra esencia',
-			'title'   => '¿Por qué Villa Hermosa?',
-			'body'    => 'No vendemos metros cuadrados: acompañamos decisiones de vida con la calidez de quien conoce cada rincón del Mediterráneo.',
-			'items'   => array(
+			'eyebrow'     => 'Nuestra esencia',
+			'title'       => '¿Por qué Villa Hermosa?',
+			'body'        => 'No vendemos metros cuadrados: acompañamos decisiones de vida con la calidez de quien conoce cada rincón del Mediterráneo.',
+			'show_items'  => true,
+			'items'       => array(
 				array(
 					'title'       => 'Trato cercano',
 					'description' => 'Un asesor dedicado que te escucha, entiende tu estilo de vida y te guía sin presiones.',
@@ -160,6 +161,17 @@ function homesea_theme_site_defaults(): array {
 					'description' => 'Arquitectos, abogados, gestores y artesanos de confianza para reformar y personalizar tu hogar.',
 					'icon'        => 'building',
 				),
+			),
+		),
+		'values' => array(
+			'title' => 'Nuestros valores:',
+			'items' => array(
+				array( 'icon' => 'clock', 'label' => 'PUNTUALIDAD' ),
+				array( 'icon' => 'handshake', 'label' => 'RESPETO' ),
+				array( 'icon' => 'globe-hands', 'label' => 'RESPONSABILIDAD' ),
+				array( 'icon' => 'loyalty', 'label' => 'LEALTAD' ),
+				array( 'icon' => 'chart-up', 'label' => 'LIDERAZGO' ),
+				array( 'icon' => 'scales', 'label' => 'ÉTICA' ),
 			),
 		),
 		'projects' => array(

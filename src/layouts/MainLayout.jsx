@@ -3,6 +3,7 @@ import Hero from '../components/Hero/Hero.jsx';
 import Stats from '../components/Stats/Stats.jsx';
 import Properties from '../components/Properties/Properties.jsx';
 import About from '../components/About/About.jsx';
+import Values from '../components/Values/Values.jsx';
 import Projects from '../components/Projects/Projects.jsx';
 import Testimonials from '../components/Testimonials/Testimonials.jsx';
 import Process from '../components/Process/Process.jsx';
@@ -21,6 +22,7 @@ export default function MainLayout({ data }) {
       <Stats items={data.stats?.items ?? []} />
       <Properties data={data.properties} />
       <About data={data.about} />
+      <Values data={data.values} />
       <Projects data={data.projects} />
       <Testimonials data={data.testimonials} />
       <Process data={data.process} />

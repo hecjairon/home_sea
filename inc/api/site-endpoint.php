@@ -51,6 +51,33 @@ function homesea_theme_opt( string $section, string $key, mixed $default = '' ):
 }
 
 /**
+ * Read a yes/no select (or legacy checkbox) as bool.
+ *
+ * @param string $section Section slug.
+ * @param string $key     Field id.
+ * @param bool   $default Default when empty / unset.
+ */
+function homesea_theme_flag_on( string $section, string $key, bool $default = true ): bool {
+	$value = homesea_theme_get_option( $section, $key, null );
+
+	if ( null === $value || false === $value || '' === $value ) {
+		return $default;
+	}
+
+	$normalized = strtolower( trim( (string) $value ) );
+
+	if ( in_array( $normalized, array( 'no', '0', 'false', 'off' ), true ) ) {
+		return false;
+	}
+
+	if ( in_array( $normalized, array( 'yes', 'on', '1', 'true', 'si', 'sí' ), true ) ) {
+		return true;
+	}
+
+	return $default;
+}
+
+/**
  * Sanitize URL allowing in-page anchors (#contacto).
  *
  * @param mixed $value Raw URL.
@@ -351,10 +378,49 @@ function homesea_theme_rest_about( array $defaults ): array {
 	}
 
 	return array(
-		'eyebrow' => sanitize_text_field( (string) homesea_theme_opt( 'about', 'eyebrow', $defaults['eyebrow'] ) ),
-		'title'   => sanitize_text_field( (string) homesea_theme_opt( 'about', 'title', $defaults['title'] ) ),
-		'body'    => sanitize_textarea_field( (string) homesea_theme_opt( 'about', 'body', $defaults['body'] ) ),
-		'items'   => empty( $items ) ? $defaults['items'] : $items,
+		'eyebrow'     => sanitize_text_field( (string) homesea_theme_opt( 'about', 'eyebrow', $defaults['eyebrow'] ) ),
+		'title'       => sanitize_text_field( (string) homesea_theme_opt( 'about', 'title', $defaults['title'] ) ),
+		'body'        => sanitize_textarea_field( (string) homesea_theme_opt( 'about', 'body', $defaults['body'] ) ),
+		'show_items'  => homesea_theme_flag_on( 'about', 'show_items', (bool) ( $defaults['show_items'] ?? true ) ),
+		'items'       => empty( $items ) ? $defaults['items'] : $items,
+	);
+}
+
+/**
+ * Build values slice (icon + label grid).
+ *
+ * @param array<string, mixed> $defaults Defaults.
+ * @return array<string, mixed>
+ */
+function homesea_theme_rest_values( array $defaults ): array {
+	$raw   = homesea_theme_get_option( 'values', 'items', array() );
+	$items = array();
+
+	if ( is_array( $raw ) ) {
+		foreach ( $raw as $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+
+			$label = sanitize_text_field( (string) ( $item['label'] ?? '' ) );
+			if ( '' === $label ) {
+				continue;
+			}
+
+			$icon = function_exists( 'homesea_theme_sanitize_values_icon' )
+				? homesea_theme_sanitize_values_icon( $item['icon'] ?? 'clock' )
+				: sanitize_text_field( (string) ( $item['icon'] ?? 'clock' ) );
+
+			$items[] = array(
+				'icon'  => $icon,
+				'label' => $label,
+			);
+		}
+	}
+
+	return array(
+		'title' => sanitize_text_field( (string) homesea_theme_opt( 'values', 'title', $defaults['title'] ) ),
+		'items' => empty( $items ) ? $defaults['items'] : $items,
 	);
 }
 
@@ -627,6 +693,7 @@ function homesea_theme_rest_site_payload(): WP_REST_Response {
 		'stats'        => homesea_theme_rest_stats( $defaults['stats'] ),
 		'properties'   => homesea_theme_rest_properties( $defaults['properties'] ),
 		'about'        => homesea_theme_rest_about( $defaults['about'] ),
+		'values'       => homesea_theme_rest_values( $defaults['values'] ),
 		'projects'     => homesea_theme_rest_projects( $defaults['projects'] ),
 		'testimonials' => homesea_theme_rest_testimonials( $defaults['testimonials'] ),
 		'process'      => homesea_theme_rest_process( $defaults['process'] ),

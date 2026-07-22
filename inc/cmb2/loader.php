@@ -28,7 +28,7 @@ function homesea_theme_settings_tab_group(): string {
 /**
  * Option key for a settings section.
  *
- * @param string $section header|hero|stats|properties|about|projects|testimonials|process|location|contact|footer|seo
+ * @param string $section header|hero|stats|properties|about|values|projects|testimonials|process|location|contact|footer|seo
  */
 function homesea_theme_section_option_key( string $section ): string {
 	return 'homesea_theme_' . sanitize_key( $section ) . '_settings';
@@ -141,6 +141,7 @@ function homesea_theme_register_cmb2(): void {
 		'stats',
 		'properties',
 		'about',
+		'values',
 		'projects',
 		'testimonials',
 		'process',
