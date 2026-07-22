@@ -105,9 +105,13 @@ function homesea_theme_icons_map( ?array $keys = null ): array {
 		if ( ! isset( $catalog[ $key ] ) ) {
 			continue;
 		}
+
+		$file = HOMESEA_THEME_DIR . '/assets/icons/' . $key . '.svg';
+		$ver  = file_exists( $file ) ? (string) filemtime( $file ) : HOMESEA_THEME_VERSION;
+
 		$map[ $key ] = array(
 			'label' => $catalog[ $key ],
-			'url'   => $base . $key . '.svg',
+			'url'   => $base . $key . '.svg?ver=' . rawurlencode( $ver ),
 		);
 	}
 
